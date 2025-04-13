@@ -1,0 +1,299 @@
+:root {
+  /* Définition des variables CSS globales pour faciliter la personnalisation du thème */
+--primary-color: #6366f1; /* Couleur principale utilisée pour les boutons et éléments interactifs */
+--primary-hover: #4f46e5; /* Couleur au survol des boutons principaux */
+--error-color: #ef4444; /* Couleur pour les messages d'erreur */
+--success-color: #22c55e; /* Couleur pour les messages de succès */
+--text-primary: #1f2937;  /* Couleur principale du texte */
+--text-secondary: #6b7280;  /* Couleur secondaire du texte */
+--bg-color: #f9fafb; /* Couleur de fond principale */
+--card-bg: #ffffff; /* Couleur de fond des cartes */
+--border-color: #e5e7eb;  /* Couleur des bordures */
+--shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);/* Ombre légère */
+--shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* Ombre standard */
+--radius-md: 0.375rem; /* Rayon moyen pour les bordures arrondies */
+--radius-lg: 0.5rem;  /* Rayon large pour les bordures arrondies */
+--transition: all 0.3s ease; /* Effet de transition par défaut */
+}
+
+/* Réinitialisation des styles par défaut des navigateurs */
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+/* Styles globaux du corps de la page */
+body {
+font-family: 'Inter', system-ui, -apple-system, sans-serif; /* Définition de la police principale */
+background-color: var(--bg-color); /* Arrière-plan de la page */
+color: var(--text-primary); /* Couleur principale du texte */
+line-height: 1.5; /* Espacement des lignes pour une meilleure lisibilité */
+min-height: 100vh; /* Hauteur minimale de la page pour occuper tout l'écran */
+display: grid;
+place-items: center; /* Centre le contenu verticalement et horizontalement */
+padding: 1rem;
+}
+
+/* Conteneur principal */
+.container {
+width: 100%;
+max-width: 32rem; /* Largeur maximale pour limiter la taille du formulaire */
+}
+/* Carte contenant le formulaire */
+.form-card {
+background: var(--card-bg);
+padding: 2rem;
+border-radius: var(--radius-lg);
+box-shadow: var(--shadow);
+}
+
+.form-header {
+text-align: center;
+margin-bottom: 2rem;
+}
+
+h1 {
+font-size: 1.5rem;
+font-weight: 600;
+margin-bottom: 0.5rem;
+}
+
+.subtitle {
+color: var(--text-secondary);
+font-size: 0.875rem;
+}
+
+/* Indicateur de progression */
+.progress-container {
+margin-bottom: 2rem;
+}
+
+.steps-indicator {
+display: flex;
+justify-content: space-between;
+margin-bottom: 1rem;
+position: relative;
+}
+
+.step-item {
+flex: 1;
+text-align: center;
+position: relative;
+}
+
+.step-circle {
+width: 2rem;
+height: 2rem;
+background-color: var(--border-color);
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+margin: 0 auto 0.5rem;
+color: var(--text-secondary);
+font-weight: 500;
+position: relative;
+z-index: 2;
+transition: var(--transition);
+}
+
+.step-text {
+font-size: 0.875rem;
+color: var(--text-secondary);
+display: block;
+}
+
+.step-item.active .step-circle {
+background-color: var(--primary-color);
+color: white;
+}
+
+.step-item.completed .step-circle {
+background-color: var(--success-color);
+color: white;
+}
+
+.progress-bar {
+height: 0.25rem;
+background-color: var(--border-color);
+border-radius: var(--radius-md);
+margin-top: -1.125rem;
+position: relative;
+z-index: 1;
+}
+
+.progress {
+height: 100%;
+background-color: var(--primary-color);
+border-radius: var(--radius-md);
+width: 0;
+transition: var(--transition);
+}
+
+/* Formulaire */
+.form-step {
+display: none;
+animation: fadeIn 0.4s ease-in-out;
+}
+
+.form-step.active {
+display: block;
+}
+
+.input-group {
+margin-bottom: 1.5rem;
+}
+
+label {
+display: block;
+font-weight: 500;
+margin-bottom: 0.5rem;
+color: var(--text-primary);
+}
+
+input {
+width: 100%;
+padding: 0.75rem 1rem;
+border: 1px solid var(--border-color);
+border-radius: var(--radius-md);
+background-color: white;
+color: var(--text-primary);
+font-size: 1rem;
+transition: var(--transition);
+}
+
+input:focus {
+outline: none;
+border-color: var(--primary-color);
+box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+input::placeholder {
+color: var(--text-secondary);
+}
+
+.password-input {
+position: relative;
+}
+
+.toggle-password {
+position: absolute;
+right: 1rem;
+top: 50%;
+transform: translateY(-50%);
+background: none;
+border: none;
+padding: 0;
+cursor: pointer;
+color: var(--text-secondary);
+}
+
+.toggle-password svg {
+fill: currentColor;
+}
+
+.password-strength {
+margin-top: 0.5rem;
+display: none;
+}
+
+.strength-bar {
+height: 4px;
+background-color: var(--border-color);
+border-radius: var(--radius-md);
+margin-bottom: 0.25rem;
+}
+
+.strength-text {
+font-size: 0.75rem;
+color: var(--text-secondary);
+}
+
+.error-message {
+color: var(--error-color);
+font-size: 0.875rem;
+margin-top: 0.5rem;
+display: none;
+}
+
+input.invalid {
+border-color: var(--error-color);
+}
+
+input.valid {
+border-color: var(--success-color);
+}
+
+/* Navigation */
+.form-navigation {
+display: flex;
+gap: 1rem;
+margin-top: 2rem;
+}
+
+.btn {
+flex: 1;
+padding: 0.75rem 1.5rem;
+border: none;
+border-radius: var(--radius-md);
+font-size: 1rem;
+font-weight: 500;
+cursor: pointer;
+transition: var(--transition);
+}
+
+.btn-prev {
+background-color: var(--bg-color);
+color: var(--text-primary);
+}
+
+.btn-next,
+.btn-submit {
+background-color: var(--primary-color);
+color: white;
+}
+
+.btn-prev:hover {
+background-color: var(--border-color);
+}
+
+.btn-next:hover,
+.btn-submit:hover {
+background-color: var(--primary-hover);
+}
+
+.btn:disabled {
+opacity: 0.5;
+cursor: not-allowed;
+}
+
+/* Animations */
+@keyframes fadeIn {
+from {
+    opacity: 0;
+    transform: translateY(10px);
+}
+to {
+    opacity: 1;
+    transform: translateY(0);
+}
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+.form-card {
+    padding: 1.5rem;
+}
+
+.step-text {
+    display: none;
+}
+
+.form-navigation {
+    flex-direction: column;
+}
+
+.btn {
+    width: 100%;
+}
+}
