@@ -166,7 +166,7 @@ recognizeBtn.addEventListener("click", async () => {
         alert("Image enregistrée et analysée avec succès !");
         closeModal.click(); // Ferme la modale
         // Optionnel: rafraîchir ou rediriger
-        // window.location.reload(); 
+        window.location.reload(); 
       } else {
         alert("Erreur lors de l'enregistrement : " + data.error);
       }

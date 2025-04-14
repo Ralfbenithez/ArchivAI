@@ -3,7 +3,6 @@ require_once __DIR__ . '/../includes/config.php';
 require_once __DIR__ . '/../includes/functions.php';
 require_once __DIR__ . '/../templates/header.php';
 
-
 session_start();
 
 // Journaliser l'état de la session pour le débogage
@@ -113,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }    
-?>    
+?>
 
 <div class="container">
     <div class="form-card">

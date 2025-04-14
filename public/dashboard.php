@@ -13,6 +13,9 @@ $totalSizeReadable = $totalSizeBytes ? round($totalSizeBytes / (1024 ** 2), 2) .
 // Nombre de documents partagés (exemple fictif, adapter si tu as une colonne dédiée)
 $sharedCount = $conn->query("SELECT COUNT(*) FROM documents WHERE document_type = 'shared'")->fetchColumn();
 
+// Nombre de types de documents différents
+$docTypeCount = $conn->query("SELECT COUNT(DISTINCT document_type) FROM documents")->fetchColumn();
+
 
 // Vérifier si l'utilisateur est connecté (plusieurs méthodes de vérification)
 if (!isset($_SESSION['user_id']) && !isset($_SESSION['user'])) {
@@ -38,6 +41,8 @@ if (!$user) {
     exit;
 }
 ?>
+
+
 <body>
   <!-- Header -->
   <header class="header">
@@ -47,8 +52,11 @@ if (!$user) {
       <span>Archiv'AI</span>
     </div>
     <div class="search-container">
-      <input type="text" placeholder="Rechercher...">
-      <button class="search-button"><i class="fas fa-search"></i></button>
+      <form action="search.php" method="GET" id="search-form">
+        <input type="text" name="query" placeholder="Rechercher...">
+      </form>
+    
+      <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
     </div>
     <div class="user-actions">
       <span class="welcome">Hello, <?= htmlspecialchars($user['nom'] ?? $user['prenom'] ?? 'Utilisateur') ?></span>
@@ -77,7 +85,9 @@ if (!$user) {
       <div class="stats">
             <div class="stat-card"><h2>Documents</h2><p><?= $docCount ?></p></div>
             <div class="stat-card"><h2>Espace utilisé</h2><p><?= $totalSizeReadable ?></p></div>
+            <div class="stat-card"><h2>Types de Documents</h2><p><?= $docTypeCount ?></p></div>
             <div class="stat-card"><h2>Partagés</h2><p><?= $sharedCount ?></p></div>
+
       </div>
       <!-- Bouton pour lancer la capture photo -->
       <button id="open-camera-btn" class="primary-button">Prendre une photo</button>
